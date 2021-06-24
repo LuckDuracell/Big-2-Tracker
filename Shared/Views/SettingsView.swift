@@ -81,12 +81,12 @@ struct SettingsView: View {
                                     .padding()
                             }
                             .onAppear(perform: {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                                if theme.theme == 3 {
                                     showList = false
-                                )}
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                    showList = true
-                                })
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                                        showList = true
+                                    }
+                                }
                             })
 
                             }) {
@@ -233,12 +233,12 @@ struct SettingsView: View {
                                         .padding()
                                 }
                                 .onAppear(perform: {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                                    if theme.theme == 3 {
                                         showList = false
-                                    )}
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                        showList = true
-                                    })
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                                            showList = true
+                                        }
+                                    }
                                 })
                             }) {
                                 ZStack {
@@ -318,15 +318,15 @@ struct SettingsView: View {
                                                 }
                                             }
                                         } .listRowBackground(Color.gray.opacity(0.2))
-                                            .onAppear(perform: {
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                                                    showList = false
-                                                )}
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                                    showList = true
-                                                })
-                                            })
                                     }
+                                    .onAppear(perform: {
+                                        if theme.theme == 3 {
+                                            showList = false
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                                                showList = true
+                                            }
+                                        }
+                                    })
                             
                             }) {
                                 ZStack {
@@ -403,13 +403,14 @@ struct SettingsView: View {
                                     } label: {
                                         WideButton(text: "Save Changes", textColor: .primary, backgroundColor: Color.gray.opacity(0.2))
                                             .padding(150)
-                                    } .onAppear(perform: {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                                    }
+                                    .onAppear(perform: {
+                                        if theme.theme == 3 {
                                             showList = false
-                                        )}
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                            showList = true
-                                        })
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                                                showList = true
+                                            }
+                                        }
                                     })
                             
                                     Spacer()
@@ -486,6 +487,7 @@ struct SettingsView: View {
                         } .listRowBackground(theme.theme == 3 ? Color.white.opacity(0.2) : Color.gray.opacity(0.2))
                         
                     }
+                    .opacity(showList ? 1 : 0)
                     .onAppear(perform: {
             
                         if theme.theme != 3 {
