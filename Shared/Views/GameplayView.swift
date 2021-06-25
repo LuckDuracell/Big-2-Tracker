@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ConfettiSwiftUI
 import Introspect
 
 struct GameplayView: View {
