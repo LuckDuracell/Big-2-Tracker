@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ConfettiSwiftUI
 
 struct WinnerView: View {
     
@@ -31,19 +32,17 @@ struct WinnerView: View {
     //App Refresher ^
     @EnvironmentObject var theme: colorThemeSetting
     
+    @State var confettiCounter: Int = 0
+    
     var body: some View {
         ZStack {
             NavigationView() {
                 ZStack {
-                    
                     if theme.theme == 3 {
                         BackgroundOld(color1: "bgPink", color2: "bgBlue")
                     }
-                    
                     ScrollView() {
                         VStack {
-                            
-                            
                             if winnerScore == 0 {
                                 Image(systemName: "crown.fill")
                                     .resizable()
@@ -231,14 +230,21 @@ struct WinnerView: View {
                         }
                     }
                 } .navigationTitle("Game Complete!")
-                
             }
+            
+            VStack {
+                Spacer()
+                ConfettiCannon(counter: $confettiCounter, num: 50, radius: UIScreen.main.bounds.height * 0.75)
+            }
+            
             
             if switchViews {
                 GameplayView()
             }
             
-        }
+        } .onAppear(perform: {
+            confettiCounter = 1
+        })
     }
 }
 
